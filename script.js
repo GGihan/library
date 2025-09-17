@@ -53,3 +53,44 @@ newBookButton.addEventListener("click", () => {
 closeButton.addEventListener("click", () => {
     dialog.close();
 });
+
+
+let userBookTitleInput = document.getElementById("book-title");
+let userBookAuthorInput = document.getElementById("book-author");
+let userBookPagesInput = document.getElementById("book-pages");
+
+
+let radioRead = document.getElementById("option-a");
+let radioNotRead = document.getElementById("option-b");
+
+
+let userBookTitle = "";
+let userBookAuthor = "";
+let userBookPages = "";
+let userBookRead = "";
+
+function getUserBookInput() {
+    userBookTitle = userBookTitleInput.value;
+    userBookAuthor = userBookAuthorInput.value;
+    userBookPages = userBookPagesInput.value;
+
+    if (radioRead.checked) {
+        userBookRead = radioRead.value;
+    } else {
+        userBookRead = radioNotRead.value;
+    };
+}
+
+function removeBooks(array) {
+    while (array.firstChild) {
+        array.removeChild(array.firstChild);
+    };
+}
+
+submitButton.addEventListener("click", () => {
+    getUserBookInput();
+    addBookToLibrary(userBookTitle, userBookAuthor, userBookPages, userBookRead);
+    //This function is used to reset the page book view.
+    removeBooks(cardDisplay)
+    displayBooks();
+});
