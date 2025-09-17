@@ -37,3 +37,19 @@ function displayBooks() {
 }
 
 displayBooks();
+
+let newBookButton = document.getElementById("new-book-button");
+
+let dialog = document.querySelector("#new-book-dialog");
+
+let closeButton = document.querySelector("#close-button");
+
+let submitButton = document.querySelector("#submit-button");
+
+newBookButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});
