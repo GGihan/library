@@ -6,6 +6,8 @@
 ul {
     display: flex;
     background-color: slategrey;
+    justify-content: center;
+    gap: 30px;
 }
 
 li {
@@ -13,4 +15,5 @@ li {
     height: 300px;
 
     list-style: none;
+    background-color: brown;
 }
