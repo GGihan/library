@@ -33,7 +33,10 @@ function displayBooks() {
         listItem = document.createElement('li');
         listItem.textContent = `Title: ${item.title}, Author: ${item.author}, Number of pages: ${item.numPages}, Have: ${item.read}, ID: ${item.id}`;
         cardDisplay.appendChild(listItem);
+        addLineBreak()
         addRemoveBookButton(item);
+        addLineBreak();
+        addChangeReadButton(item);
     });
 }
 
@@ -92,16 +95,42 @@ submitButton.addEventListener("click", () => {
 function addRemoveBookButton(item) {
     let removeBookButton = document.createElement("button");
     removeBookButton.type = "button";
-    removeBookButton.textContent = "Remove"
-    removeBookButton.dataset.bookId = item.id
+    removeBookButton.textContent = "Remove";
+    removeBookButton.dataset.bookId = item.id;
     listItem.appendChild(removeBookButton);
 }
 
 cardDisplay.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON" && event.target.dataset.bookId) {
-        const bookId = event.target.dataset.bookId
-        myLibrary = myLibrary.filter(book => book.id != bookId);
+        const bookId = event.target.dataset.bookId;
+        if (event.target.textContent === "Remove") {
+            myLibrary = myLibrary.filter(book => book.id != bookId);
+        } else if (event.target.textContent === "Change Status") {
+            const bookToUpdate = myLibrary.find(book => book.id == bookId);
+
+            if (bookToUpdate) {
+                if (bookToUpdate.read === "read") {
+                    bookToUpdate.read = "not read yet";
+                } else {
+                    bookToUpdate.read = "read";
+                }
+            }
+        }
+        
         cardDisplay.innerHTML = "";
         displayBooks();
     }
 });
+
+function addChangeReadButton(item) {
+    let changeReadButton = document.createElement("button");
+    changeReadButton.type = "button";
+    changeReadButton.textContent = "Change Status";
+    changeReadButton.dataset.bookId = item.id;
+    listItem.appendChild(changeReadButton);
+}
+
+function addLineBreak() {
+    const lineBreak = document.createElement("br");
+    listItem.appendChild(lineBreak);
+}
