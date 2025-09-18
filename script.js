@@ -31,7 +31,29 @@ let listItem = "";
 function displayBooks() {
     myLibrary.forEach(item => {
         listItem = document.createElement('li');
-        listItem.textContent = `Title: ${item.title}, Author: ${item.author}, Number of pages: ${item.numPages}, Have: ${item.read}, ID: ${item.id}`;
+        
+        const title = document.createElement('span');
+        title.textContent = `Title: ${item.title}`;
+        listItem.appendChild(title);
+
+        addLineBreak();
+
+        const author = document.createElement('span');
+        author.textContent = `Author: ${item.author}`;
+        listItem.appendChild(author);
+
+        addLineBreak();
+
+        const numPages = document.createElement('span');
+        numPages.textContent = `Number of Pages: ${item.numPages}`;
+        listItem.appendChild(numPages);
+
+        addLineBreak();
+
+        const readStatus = document.createElement('span');
+        readStatus.textContent = `Have: ${item.read}`;
+        listItem.appendChild(readStatus);
+
         cardDisplay.appendChild(listItem);
         addLineBreak()
         addRemoveBookButton(item);
