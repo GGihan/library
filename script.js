@@ -24,15 +24,16 @@ addBookToLibrary("Title2", "Author2", "320 pages", "read");
 addBookToLibrary("Title3", "Author3", "270 pages", "not read yet");
 addBookToLibrary("Title4", "Author4", "259 pages", "not read yet");
 
-console.log(myLibrary);
 
 let cardDisplay = document.querySelector(".display-cards");
+let listItem = "";
 
 function displayBooks() {
     myLibrary.forEach(item => {
-        const listItem = document.createElement('li');
+        listItem = document.createElement('li');
         listItem.textContent = `Title: ${item.title}, Author: ${item.author}, Number of pages: ${item.numPages}, Have: ${item.read}, ID: ${item.id}`;
         cardDisplay.appendChild(listItem);
+        addRemoveBookButton(item);
     });
 }
 
@@ -81,16 +82,26 @@ function getUserBookInput() {
     };
 }
 
-function removeBooks(array) {
-    while (array.firstChild) {
-        array.removeChild(array.firstChild);
-    };
-}
-
 submitButton.addEventListener("click", () => {
     getUserBookInput();
     addBookToLibrary(userBookTitle, userBookAuthor, userBookPages, userBookRead);
-    //This function is used to reset the page book view.
-    removeBooks(cardDisplay)
+    cardDisplay.innerHTML = "";
     displayBooks();
+});
+
+function addRemoveBookButton(item) {
+    let removeBookButton = document.createElement("button");
+    removeBookButton.type = "button";
+    removeBookButton.textContent = "Remove"
+    removeBookButton.dataset.bookId = item.id
+    listItem.appendChild(removeBookButton);
+}
+
+cardDisplay.addEventListener("click", (event) => {
+    if (event.target.tagName === "BUTTON" && event.target.dataset.bookId) {
+        const bookId = event.target.dataset.bookId
+        myLibrary = myLibrary.filter(book => book.id != bookId);
+        cardDisplay.innerHTML = "";
+        displayBooks();
+    }
 });
