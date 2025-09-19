@@ -54,6 +54,12 @@ function displayBooks() {
         readStatus.textContent = `Have: ${item.read}`;
         listItem.appendChild(readStatus);
 
+        addLineBreak();
+
+        const uniqueBookId = document.createElement('span');
+        uniqueBookId.textContent = `Book ID: ${item.id}`;
+        listItem.appendChild(uniqueBookId);
+
         cardDisplay.appendChild(listItem);
         addLineBreak()
         addRemoveBookButton(item);
