@@ -17,3 +17,8 @@ li {
     list-style: none;
     background-color: brown;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+}

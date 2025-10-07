@@ -102,6 +102,8 @@ let userBookAuthor = "";
 let userBookPages = "";
 let userBookRead = "";
 
+const titleError = document.getElementById('title-error');
+
 function getUserBookInput() {
     userBookTitle = userBookTitleInput.value;
     userBookAuthor = userBookAuthorInput.value;
@@ -114,7 +116,15 @@ function getUserBookInput() {
     };
 }
 
-submitButton.addEventListener("click", () => {
+submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    
+    if (userBookTitleInput.value.trim() === '') {
+        titleError.textContent = 'Hold on! Your title is required.';
+        return;
+    } 
+    
+    titleError.textContent = '';
     getUserBookInput();
     addBookToLibrary(userBookTitle, userBookAuthor, userBookPages, userBookRead);
     cardDisplay.innerHTML = "";
